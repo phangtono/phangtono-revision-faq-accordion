@@ -30,8 +30,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [faq-accordion-solution](https://github.com/phangtono/faq-accordion)
-- Live Site URL: [faq-accordion-live-site](https://poetic-croquembouche-e62d0a.netlify.app/)
+- Solution URL: [faq-accordion-solution](https://github.com/phangtono/phangtono-revision-faq-accordion)
+- Live Site URL: [faq-accordion-live-site](https://clinquant-monstera-75309e.netlify.app/)
 
 ## My process
 
@@ -42,70 +42,92 @@ Users should be able to:
 - CSS
 - Flexbox
 - Grid
+- pseudo-element :after
 
 ### What I learned
+Thank you for the valuable feedback from mentor @grace-snow (https://www.frontendmentor.io/profile/grace-snow). I've implemented some improvements based on the suggestions. 
 
-This script runs when the click event occurs, or when we press enter while the focus is on the link a href.
+If previously I used @import, this time I used the link tag in the html head. (for better performance).
 
-```js
-
-const listItems = document.querySelectorAll('#mylist li');
-
-listItems.forEach(item => {
-    item.addEventListener('click', function() {
-        listItems.forEach(li => {
-            li.classList.remove('checked');
-        });
-
-        this.classList.add('checked');
-    });
-});
-
+```html
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 ```
-To get the layout, I used a grid. and to make it responsive, I use minmax
+
+In this implementation, I use landmarks, empty string for alt on the decorative image. and use the picture tag for the background image. (for better performance)
+
+```html
+<header>
+    <picture>
+        <source media="(max-width:1440px)" srcset="assets/images/background-pattern-desktop.svg">
+        <source media="(max-width:810px)" srcset="assets/images/background-pattern-mobile.svg">
+        <img src="assets/images/background-pattern-desktop.svg">
+    </picture>
+</header>
+```
+
+For layout I still use a grid. the values in grid-template-columns, grid-template-rows are slightly different from before, resulting in a smoother response.
+
 ```css
-.wrapper{
-    display: grid;
-    grid-template-columns: minmax(1rem,auto) minmax(340px,540px) minmax(1rem,auto);
-    grid-template-rows: 15% 15% min-content auto;
+body {
+    background-color: var(--clr-light-pink);
+    min-height: 100vh;
     height: 100%;
+    display: grid;
+    grid-template-columns: 1fr minmax(auto,720px) 1fr;
+    grid-template-rows: 10vh 15vh min-content;
 }
-.image {
+
+header{
     background-color: var(--clr-dark-purple);
-    background-image: url('assets/images/background-pattern-desktop.svg');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
     grid-column: 1 / -1;
     grid-row: 1 / 3;
 }
-.faq{
-    --gap : 1.5rem;
 
-    background-color: var(--clr-white);
+main{
     grid-column: 2 / 3;
     grid-row: 2 / 4;
+}
 
-    border-radius: var(--gap);
-    padding: var(--gap);
-
+footer{
+    font-size: 68.75%; 
+    text-align: center;
+    padding: 1rem;
+    grid-column: 2 / 3;
+    grid-row: -1 / span 1;
 }
 ```
-I use flexbox to get a layout like the design.
+
+What's interesting about this implementation? if previously I used an empty div (I also used the img tag), this time I used the :after pseudo-element, with the content property. the results are really cool.
+
 ```css
-.faq .title {
-    display: flex;
-    gap: var(--gap);
-    align-items: center;
-    justify-items: start;
-    font-weight: var(--fw--700);
-    font-size: var(--fs--700);
+.card-faq__ques::after{
+    width: 2rem;
+    height: 2rem;
+    content: url('assets/images/icon-plus.svg');
 }
+
+.show .card-faq__ques::after{
+    content: url('assets/images/icon-minus.svg');
+}
+```
+
+The following is a JavaScript script that has been adjusted to accommodate the HTML changes.
+
+```js
+document.addEventListener('DOMContentLoaded', function () {
+    const faqItems = document.querySelectorAll('.card-faq__ques-list-item');
+
+    faqItems.forEach(function (item) {
+        item.addEventListener('click', function () {
+            this.classList.toggle('show');
+
+        });
+    });
+});
 ```
 
 ## Author
 
 - Frontend Mentor - [@phangtono](https://www.frontendmentor.io/profile/phangtono)
-"# faq-accordion" 
-"# faq-accordion-rev1" 
-"# phangtono-revision-faq-accordion" 

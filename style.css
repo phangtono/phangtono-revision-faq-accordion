@@ -47,6 +47,18 @@ main{
     grid-row: 2 / 4;
 }
 
+footer{
+    font-size: 68.75%; 
+    text-align: center;
+    padding: 1rem;
+    grid-column: 2 / 3;
+    grid-row: -1 / span 1;
+}
+
+footer a{
+    color: hsl(228, 45%, 44%);
+}
+
 article{
     --gap: 2rem;
     background-color: var(--clr-white);
@@ -124,14 +136,3 @@ article{
     display: block;
 }
 
-footer{
-    font-size: 68.75%; 
-    text-align: center;
-    padding: 1rem;
-    grid-column: 2 / 3;
-    grid-row: -1 / span 1;
-}
-
-footer a{
-    color: hsl(228, 45%, 44%);
-}
