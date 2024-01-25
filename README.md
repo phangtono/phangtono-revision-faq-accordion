@@ -45,6 +45,9 @@ Users should be able to:
 - pseudo-element :after
 
 ### What I learned
+
+Revision From : https://www.frontendmentor.io/solutions/faq-accordion-using-grid-and-flexbox-0TqFbMwANx
+
 Thank you for the valuable feedback from mentor @grace-snow (https://www.frontendmentor.io/profile/grace-snow). I've implemented some improvements based on the suggestions. 
 
 If previously I used @import, this time I used the link tag in the html head. (for better performance).
